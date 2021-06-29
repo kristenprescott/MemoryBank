@@ -42,15 +42,17 @@ const Post = ({ post, setCurrentId }) => {
         >
           <img style={{ width: "50%", height: "50%" }} src={MoreHorIcon} />
         </Button>
-        {post._id}
       </div>
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+      <Typography className={classes.title} variant="h5" gutterBottom>
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography className={classes.title} variant="h5" gutterBottom>
+        <Typography variant="body2" color="textSecondary" component="p">
           {post.message}
         </Typography>
       </CardContent>

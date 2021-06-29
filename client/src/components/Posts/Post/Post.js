@@ -13,11 +13,16 @@ import MoreHorIcon from "../../../images/more.png";
 import DeleteIcon from "../../../images/delete.png";
 import moment from "moment";
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card
+      className={classes.card}
+      style={{
+        boxShadow: "6px 6px 10px 0px rgba(0,0,0,0.65)",
+      }}
+    >
       <CardMedia
         className={classes.media}
         image={post.selectedFile}
@@ -30,9 +35,14 @@ const Post = ({ post }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => {}}>
-          <img style={{ width: "30%" }} src={MoreHorIcon} />
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => setCurrentId(post._id)}
+        >
+          <img style={{ width: "50%", height: "50%" }} src={MoreHorIcon} />
         </Button>
+        {post._id}
       </div>
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
@@ -45,14 +55,35 @@ const Post = ({ post }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        {" "}
         <Button size="small" color="primary" onClick={() => {}}>
-          <img style={{ width: "30%" }} src={DeleteIcon} />
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <img
+              style={{
+                width: "30%",
+                height: "30%",
+              }}
+              src={DeleteIcon}
+            />
+          </div>
         </Button>
         <Button size="small" color="primary" onClick={() => {}}>
-          <img style={{ width: "30%" }} src={ThumbsUpIcon} />
-          <hr></hr>
-          {post.likeCount}
+          <div
+            style={{
+              border: "1px solid transparent",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <img style={{ width: "30%", height: "30%" }} src={ThumbsUpIcon} />
+            <div
+              style={{
+                fontSize: "22px",
+                margin: "10px 0px 0px 10px",
+              }}
+            >
+              {post.likeCount}
+            </div>
+          </div>
         </Button>
       </CardActions>
     </Card>

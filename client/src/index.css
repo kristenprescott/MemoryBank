@@ -9,9 +9,11 @@ font-family: 'Share Tech Mono', monospace;
 body {
   margin: 0;
   font-family: "Josefin Slab", serif;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: #ffeddf;
+  color: #0d1321;
 }
 
 code {

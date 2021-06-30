@@ -36,7 +36,7 @@ function App() {
           align="center"
           style={{
             fontFamily: '"Corben"',
-            fontSize: "52px",
+            fontSize: "calc(2vw + 2vh + 1.5vmin)",
             fontWeight: "700",
             color: "#0D1321",
             padding: "1rem",

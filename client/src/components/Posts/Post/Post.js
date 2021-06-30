@@ -13,7 +13,7 @@ import MoreHorIcon from "../../../images/more.png";
 import DeleteIcon from "../../../images/delete.png";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../actions/posts";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
@@ -75,7 +75,11 @@ const Post = ({ post, setCurrentId }) => {
             />
           </div>
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(likePost(post._id))}
+        >
           <div
             style={{
               border: "1px solid transparent",
@@ -83,15 +87,17 @@ const Post = ({ post, setCurrentId }) => {
               justifyContent: "flex-end",
             }}
           >
-            <img style={{ width: "30%", height: "30%" }} src={ThumbsUpIcon} />
             <div
               style={{
                 fontSize: "22px",
                 margin: "10px 0px 0px 10px",
               }}
             >
+              &nbsp;
               {post.likeCount}
+              &nbsp;
             </div>
+            <img style={{ width: "30%", height: "30%" }} src={ThumbsUpIcon} />
           </div>
         </Button>
       </CardActions>

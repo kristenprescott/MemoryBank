@@ -59,8 +59,8 @@ const Form = ({ currentId, setCurrentId }) => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h5">
-          `{currentId ? "Editing" : "Make a deposit"}`
+        <Typography variant="h4">
+          {currentId ? "Editing" : "Make a deposit"}
         </Typography>
         <TextField
           name="creator"
@@ -95,11 +95,11 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="tags"
           variant="outlined"
-          label="Tags"
+          label="Tags (comma separated)"
           fullWidth
           value={postData.tags}
           onChange={(e) => {
-            setPostData({ ...postData, tags: e.target.value });
+            setPostData({ ...postData, tags: e.target.value.split(",") });
           }}
         />
 

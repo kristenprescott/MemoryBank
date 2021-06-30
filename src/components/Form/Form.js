@@ -66,12 +66,13 @@ const Form = ({ currentId, setCurrentId }) => {
       className={classes.paper}
       style={{
         boxShadow: "6px 6px 10px 0px rgba(0,0,0,0.75)",
+        // width: "35vmin",
       }}
     >
       <form
         autoComplete="off"
         noValidate
-        className={`${classes.root} ${classes.form}`}
+        className={`${classes.root} ${classes.f}`}
         onSubmit={handleSubmit}
       >
         <Typography variant="h4">

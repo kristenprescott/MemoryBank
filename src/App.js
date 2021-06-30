@@ -4,23 +4,31 @@ import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import useStyles from "./styles";
 import "./App.css";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import React from "react";
+import PostDetails from "./components/PostDetails/PostDetails";
 
-function App() {
+const App = () => {
   const classes = useStyles();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   return (
     <BrowserRouter>
-      <Container maxwidth="lg" className="App">
+      <Container maxwidth="xl" className="App">
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/auth" component={Auth} />
+          <Route path="/" exact component={() => <Redirect to="/posts" />} />
+          <Route path="/posts" exact component={Home} />
+          <Route path="/posts/search" exact component={Home} />
+          <Route path="/posts/:id" component={PostDetails} />
+          <Route
+            path="/auth"
+            component={() => (!user ? <Auth /> : <Redirect to="/posts" />)}
+          />
         </Switch>
       </Container>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

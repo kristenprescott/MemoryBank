@@ -28,22 +28,25 @@ const Post = ({ post, setCurrentId }) => {
         <>
           &nbsp;
           {post.likes.length > 2
-            ? `You and ${post.likes.length - 1} others`
-            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
-          <img style={{ width: "30%" }} src={ThumbsUpIcon} />
+            ? // ? `You and ${post.likes.length - 1} others`
+              // : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+              ` ${post.likes.length - 1} `
+            : `${post.likes.length} ${post.likes.length > 1 ? "" : ""}`}
+          <img style={{ width: "5vmin" }} src={ThumbsUpIcon} />
         </>
       ) : (
         <>
-          &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
-          <img style={{ width: "30%" }} src={ThumbsUpIcon} />
+          {/* &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"} */}
+          &nbsp;{post.likes.length} {post.likes.length === 1 ? "" : ""}
+          <img style={{ width: "5vmin" }} src={ThumbsUpIcon} />
         </>
       );
     }
 
     return (
       <>
-        &nbsp;Like
-        <img style={{ width: "30%" }} src={ThumbsUpIcon} />
+        {/* &nbsp;Like */}
+        <img style={{ width: "5vmin" }} src={ThumbsUpIcon} />
       </>
     );
   };
@@ -99,7 +102,14 @@ const Post = ({ post, setCurrentId }) => {
             color="primary"
             onClick={() => dispatch(deletePost(post._id))}
           >
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                textAlign: "center",
+                width: "18vmin",
+              }}
+            >
               <img
                 style={{
                   width: "30%",
@@ -116,16 +126,13 @@ const Post = ({ post, setCurrentId }) => {
           disabled={!user?.result}
           onClick={() => dispatch(likePost(post._id))}
         >
-          <div
-            style={{
-              border: "1px solid transparent",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
+          <div>
             <div
               style={{
                 fontSize: "22px",
+                // display: "flex",
+                // justifyContent: "space-evenly",
+                // alignItems: "center",
                 margin: "10px 0px 0px 10px",
               }}
             >

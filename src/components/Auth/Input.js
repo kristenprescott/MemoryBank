@@ -32,29 +32,22 @@ const Input = ({
             ? {
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton
-                      style={{ position: "relative" }}
-                      onClick={handleShowPassword}
-                    >
+                    <IconButton onClick={handleShowPassword}>
                       {type === "password" ? (
                         <img
                           style={{
-                            zIndex: "1",
+                            marginLeft: "-100px",
+                            cursor: "pointer",
                             width: "10%",
-                            // position: "absolute",
-                            // top: "25px",
-                            // left: "25px",
                           }}
                           src={VisibilityOff}
                         />
                       ) : (
                         <img
                           style={{
-                            zIndex: "1",
+                            marginLeft: "-100px",
+                            cursor: "pointer",
                             width: "10%",
-                            // position: "absolute",
-                            // top: "25px",
-                            // left: "25px",
                           }}
                           src={Visibility}
                         />

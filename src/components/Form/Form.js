@@ -54,7 +54,7 @@ const Form = ({ currentId, setCurrentId }) => {
       }}
     >
       <form
-        autocomplete="off"
+        autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}

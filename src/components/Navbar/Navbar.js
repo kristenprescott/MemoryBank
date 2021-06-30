@@ -9,12 +9,22 @@ import * as actionType from "../../constants/actionTypes";
 
 const Navbar = () => {
   const classes = useStyles();
-
-  const user = null;
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const logout = () => {
-    console.log("logout");
+    dispatch({ type: "LOGOUT" });
+    history.push("/");
+    setUser(null);
   };
+
+  useEffect(() => {
+    const token = user?.token;
+    // JWT...
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
   return (
     <AppBar
@@ -29,6 +39,13 @@ const Navbar = () => {
       }}
     >
       <div className={classes.brandContainer}>
+        <img
+          style={{ filter: "drop-shadow(5px 5px 2.5px rgba(0,0,0,0.75))" }}
+          className={classes.image}
+          src={memories}
+          alt="memories"
+          width="10%"
+        />
         <Typography
           component={Link}
           to="/"
@@ -46,13 +63,6 @@ const Navbar = () => {
         >
           MemoryBank
         </Typography>
-        <img
-          style={{ filter: "drop-shadow(5px 5px 2.5px rgba(0,0,0,0.75))" }}
-          className={classes.image}
-          src={memories}
-          alt="memories"
-          width="10%"
-        />
       </div>
 
       <Toolbar className={classes.toolbar}>
@@ -60,13 +70,13 @@ const Navbar = () => {
           <div className={classes.profile}>
             <Avatar
               className={classes.purple}
-              alt={user.result.name}
-              src={user.result.imageUrl}
+              alt={user?.result.givenName}
+              src={user?.result.imageUrl}
             >
-              {user.result.name.charAt(0)}
+              {user?.result.givenName.charAt(0)}
             </Avatar>
             <Typography className={classes.username} variant="h6">
-              {user.result.name}
+              {user.result.givenName}
             </Typography>
             <Button
               variant="contained"
@@ -79,6 +89,7 @@ const Navbar = () => {
           </div>
         ) : (
           <Button
+            className={classes.signin}
             component={Link}
             to="/auth"
             variant="contained"

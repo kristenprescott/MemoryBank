@@ -7,6 +7,7 @@ import cors from "cors";
 import postRoutes from "./routes/posts.js";
 
 const app = express();
+dotenv.config();
 const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));

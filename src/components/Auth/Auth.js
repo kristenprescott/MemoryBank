@@ -37,15 +37,14 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
-    // setShowPassword(!showPassword);
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+    setShowPassword(!showPassword);
+    // setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   const switchMode = () => {
     setFormData(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    handleShowPassword(false);
-    // setShowPassword(false);
+    setShowPassword(false);
   };
 
   const handleSubmit = (e) => {
@@ -152,7 +151,7 @@ const Auth = () => {
                 color="primary"
                 fullWidth
                 onClick={renderProps.onClick}
-                // disabled={renderProps.disabled}
+                disabled={renderProps.disabled}
                 startIcon={<Icon />}
                 variant="contained"
               >

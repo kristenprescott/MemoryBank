@@ -15,14 +15,22 @@ const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const logout = () => {
-    dispatch({ type: "LOGOUT" });
-    history.push("/");
+    dispatch({ type: actionType.LOGOUT });
+
+    history.push("/auth");
+
     setUser(null);
   };
 
   useEffect(() => {
     const token = user?.token;
-    // JWT...
+
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
@@ -73,7 +81,7 @@ const Navbar = () => {
               alt={user?.result.givenName}
               src={user?.result.imageUrl}
             >
-              {user?.result.givenName.charAt(0)}
+              {user?.result.name.charAt(0)}
             </Avatar>
             <Typography className={classes.username} variant="h6">
               {user.result.givenName}

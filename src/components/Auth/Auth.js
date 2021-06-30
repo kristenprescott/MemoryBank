@@ -143,8 +143,8 @@ const Auth = () => {
           </Button>
 
           <GoogleLogin
-            clientId="49927675062-udgdjg8b3qaausnndcvg4f940781dt54.apps.googleusercontent.com"
-            // clientSecret="w1rbcfa6E1GhPShtneWvSI_M"
+            clientId="49927675062-86pc2ni6qrdo1l8he5tldi28cps12ol2.apps.googleusercontent.com"
+            // clientId="49927675062-udgdjg8b3qaausnndcvg4f940781dt54.apps.googleusercontent.com"
             render={(renderProps) => (
               <Button
                 className={classes.googleButton}

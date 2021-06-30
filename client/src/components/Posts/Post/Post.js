@@ -12,9 +12,12 @@ import ThumbsUpIcon from "../../../images/like.png";
 import MoreHorIcon from "../../../images/more.png";
 import DeleteIcon from "../../../images/delete.png";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../../actions/posts";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <Card
@@ -57,7 +60,11 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(deletePost(post._id))}
+        >
           <div style={{ display: "flex", justifyContent: "flex-start" }}>
             <img
               style={{

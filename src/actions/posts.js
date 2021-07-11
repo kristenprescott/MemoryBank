@@ -8,7 +8,7 @@ import {
   UPDATE,
   DELETE,
   LIKE,
-  COMMENTPOST,
+  COMMENT,
 } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
@@ -121,7 +121,11 @@ export const commentPost = (value, id) => async (dispatch) => {
     // const response = await api.comment(value, id);
     const { data } = await api.comment(value, id);
 
-    console.log("commentPost data: ", data); // { comments: ['new comment']}
+    // console.log("commentPost data: ", data); // { comments: ['new comment']}
+    // dispatch a new action:
+    dispatch({ type: "COMMENT", payload: data });
+    // return latest comment:
+    return data.comments;
   } catch (error) {
     console.log(error);
   }

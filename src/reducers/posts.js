@@ -6,6 +6,7 @@ import {
   UPDATE,
   DELETE,
   LIKE,
+  COMMENT,
   START_LOADING,
   END_LOADING,
 } from "../constants/actionTypes";
@@ -33,6 +34,18 @@ export default (state = { isLoading: true, posts: [] }, action) => {
         posts: state.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
+      };
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          // change the post that just recieved a comment
+          if (post._id === action.payload._id) {
+            return action.payload;
+          }
+          // else, return all posts normally:
+          return post;
+        }),
       };
     case CREATE:
       return { ...state, posts: [...state.posts, action.payload] };

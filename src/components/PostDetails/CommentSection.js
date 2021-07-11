@@ -5,7 +5,7 @@ import { Typography, TextField, Button } from "@material-ui/core";
 
 const CommentSection = ({ post }) => {
   console.log("comment section");
-  console.log(post);
+  console.log("post: ", post);
 
   return (
     <div className="CommentSection">

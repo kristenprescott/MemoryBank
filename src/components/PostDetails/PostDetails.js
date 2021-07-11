@@ -68,8 +68,7 @@ const PostDetails = () => {
       <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">
-            <span>TITLE: </span>
-            {post && post.title && <span>{post.title}</span>}
+            {post.post.title && <span>{post.post.title}</span>}
           </Typography>
           <Typography
             gutterBottom
@@ -77,22 +76,20 @@ const PostDetails = () => {
             color="textSecondary"
             component="h2"
           >
-            <span>TAGS: </span>
-            {post && post.tags && (
-              <span>{post.tags.map((tag) => `#${tag} `)}</span>
+            {post.post.tags && (
+              <span>{post.post.tags.map((tag) => `#${tag} `)}</span>
             )}
           </Typography>
           <Typography gutterBottom variant="body1" component="p">
-            <span>MESSAGE: </span>
-            {post && post.message && <span>{post.message}</span>}
+            {post.post.message && <span>{post.post.message}</span>}
           </Typography>
           <Typography variant="h6">
             Created by:
-            {post && post.name && <span>{post.name}</span>}
+            {post.post.name && <span>{post.post.name}</span>}
           </Typography>
           <Typography variant="body1">
-            {post && post.createdAt && (
-              <span>{moment(post.createdAt).fromNow()}</span>
+            {post.post.createdAt && (
+              <span>{moment(post.post.createdAt).fromNow()}</span>
             )}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
@@ -101,16 +98,16 @@ const PostDetails = () => {
             <strong>Realtime Chat - coming soon!</strong>
           </Typography> */}
           {/* <Divider style={{ margin: "20px 0" }} /> */}
-          {post && <CommentSection post={post} />}
+          {post.post && <CommentSection post={post.post} />}
           <Divider style={{ margin: "20px 0" }} />
         </div>
 
         <div className={classes.imageSection}>
-          {post && post.selectedFile && post.title && (
+          {post.post.selectedFile && post.post.title && (
             <img
               className={classes.media}
-              src={post.selectedFile}
-              alt={post.title}
+              src={post.post.selectedFile}
+              alt={post.post.title}
               // style={{ width: "20%" }}
             />
           )}
@@ -122,7 +119,7 @@ const PostDetails = () => {
             You might like:{" "}
           </Typography>
           <Divider />
-          <div clasName={classes.recommendedPosts}>
+          <div className={classes.recommendedPosts}>
             {recommendedPosts.map(
               ({ title, message, name, likes, selectedFile, _id }) => (
                 <div>{title}</div>

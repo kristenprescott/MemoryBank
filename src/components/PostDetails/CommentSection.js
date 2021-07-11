@@ -11,12 +11,12 @@ const CommentSection = ({ post }) => {
   const classes = useStyles();
   const [comments, setComments] = useState([1, 2, 3, 4]);
   const [comment, setComment] = useState("");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    const finalComment = `${user.result.name}: ${comment}`;
-    dispatch(commentPost(finalComment, post._id));
+    const finalComment = `${user.result.name}: ${post.comment}`;
+    dispatch(commentPost(finalComment, post.post._id));
   };
 
   return (
@@ -26,38 +26,41 @@ const CommentSection = ({ post }) => {
           <Typography gutterBottom variant="h6">
             <span>Comments: </span>
           </Typography>
-          {comments &&
-            comments.map((comment, idx) => (
+          {post.post.comments &&
+            post.post.comments.map((comment, idx) => (
               <Typography key={idx} gutterBottom variant="subtitle1">
                 Comment {idx}
               </Typography>
             ))}
         </div>
-        <div style={{ width: "70%" }}>
-          <Typography gutterBottom variant="h6">
-            Write a Comment:
-          </Typography>
-          <TextField
-            fullWidth
-            rows={4}
-            variant="outlined"
-            label="Comment"
-            multiline
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
+        {/* BELOW: don't throw a hissy is the user doesn't exist */}
+        {user?.result?.name && (
+          <div style={{ width: "70%" }}>
+            <Typography gutterBottom variant="h6">
+              Write a Comment:
+            </Typography>
+            <TextField
+              fullWidth
+              rows={4}
+              variant="outlined"
+              label="Comment"
+              multiline
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
 
-          <Button
-            style={{ marginTop: "10px" }}
-            fullWidth
-            disabled={!comment}
-            variant="contained"
-            color="primary"
-            onClick={handleClick}
-          >
-            Submit
-          </Button>
-        </div>
+            <Button
+              style={{ marginTop: "10px" }}
+              fullWidth
+              disabled={!comment}
+              variant="contained"
+              color="primary"
+              onClick={handleClick}
+            >
+              Submit
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

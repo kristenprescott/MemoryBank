@@ -20,7 +20,11 @@ const PostDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getPost(id));
+    if (post) {
+      if (post.id) {
+        dispatch(getPost(id));
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -37,13 +41,13 @@ const PostDetails = () => {
 
   const openPost = (_id) => history.push(`/posts/${_id}`);
 
-  if (isLoading) {
-    return (
-      <Paper elevation={6} className={classes.loadingPaper}>
-        <CircularProgress size="7em" />
-      </Paper>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Paper elevation={6} className={classes.loadingPaper}>
+  //       <CircularProgress size="7em" />
+  //     </Paper>
+  //   );
+  // }
 
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
@@ -64,7 +68,8 @@ const PostDetails = () => {
       <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">
-            {post.title}
+            <span>TITLE: </span>
+            {post && post.title && <span>{post.title}</span>}
           </Typography>
           <Typography
             gutterBottom
@@ -72,14 +77,23 @@ const PostDetails = () => {
             color="textSecondary"
             component="h2"
           >
-            {post.tags.map((tag) => `#${tag} `)}
+            <span>TAGS: </span>
+            {post && post.tags && (
+              <span>{post.tags.map((tag) => `#${tag} `)}</span>
+            )}
           </Typography>
           <Typography gutterBottom variant="body1" component="p">
-            {post.message}
+            <span>MESSAGE: </span>
+            {post && post.message && <span>{post.message}</span>}
           </Typography>
-          <Typography variant="h6">Created by: {post.name}</Typography>
+          <Typography variant="h6">
+            Created by:
+            {post && post.name && <span>{post.name}</span>}
+          </Typography>
           <Typography variant="body1">
-            {moment(post.createdAt).fromNow()}
+            {post && post.createdAt && (
+              <span>{moment(post.createdAt).fromNow()}</span>
+            )}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
 
@@ -87,17 +101,19 @@ const PostDetails = () => {
             <strong>Realtime Chat - coming soon!</strong>
           </Typography> */}
           {/* <Divider style={{ margin: "20px 0" }} /> */}
-          <CommentSection post={post} />
+          {post && <CommentSection post={post} />}
           <Divider style={{ margin: "20px 0" }} />
         </div>
 
         <div className={classes.imageSection}>
-          <img
-            className={classes.media}
-            src={post.selectedFile}
-            alt={post.title}
-            // style={{ width: "20%" }}
-          />
+          {post && post.selectedFile && post.title && (
+            <img
+              className={classes.media}
+              src={post.selectedFile}
+              alt={post.title}
+              // style={{ width: "20%" }}
+            />
+          )}
         </div>
       </div>
       {recommendedPosts.length && (
@@ -115,7 +131,7 @@ const PostDetails = () => {
           </div>
         </div>
       )}
-      {/* {!!recommendedPosts.length && (
+      {!!recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">
             You might also like:
@@ -146,8 +162,8 @@ const PostDetails = () => {
               )
             )}
           </div>
-        </div> */}
-      {/* )} */}
+        </div>
+      )}
     </Paper>
   );
 };

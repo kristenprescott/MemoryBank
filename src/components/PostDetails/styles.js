@@ -40,4 +40,11 @@ export default makeStyles((theme) => ({
     borderRadius: "15px",
     height: "39vh",
   },
+  PostDetails: {
+    filter: "drop-shadow(7px 7px 10px rgba(0,0,0,0.55))",
+    height: "100vh",
+    width: "100%",
+    padding: "20px",
+    borderRadius: "15px",
+  },
 }));

@@ -5,10 +5,11 @@ export default makeStyles((theme) => ({
     borderRadius: "20px",
     objectFit: "cover",
     width: "100%",
-    maxHeight: "600px",
+    maxHeight: "500px",
   },
   card: {
     display: "flex",
+    flexDirection: "column",
     width: "100%",
     [theme.breakpoints.down("sm")]: {
       flexWrap: "wrap",
@@ -42,9 +43,24 @@ export default makeStyles((theme) => ({
   },
   PostDetails: {
     filter: "drop-shadow(7px 7px 10px rgba(0,0,0,0.55))",
-    height: "100vh",
+    height: "auto",
     width: "100%",
     padding: "20px",
     borderRadius: "15px",
+  },
+  commentsOuterContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+  commentsInnerContainer: {
+    // display: "flex",
+    // justifyContent: "space-between",
+    // flexDirection: "column",
+    // alignItems: "flex-start",
+    height: "200px",
+    overflowY: "auto",
+    marginRight: "30px",
   },
 }));

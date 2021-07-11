@@ -1,16 +1,16 @@
+import useStyles from "./styles";
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
+import { getPost, getPostsBySearch } from "../../actions/posts";
 import {
   Paper,
   Typography,
   CircularProgress,
   Divider,
 } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { useParams, useHistory } from "react-router-dom";
-import useStyles from "./styles";
-
-import { getPost, getPostsBySearch } from "../../actions/posts";
+import CommentSection from "./CommentSection";
 
 const PostDetails = () => {
   const classes = useStyles();
@@ -49,13 +49,16 @@ const PostDetails = () => {
 
   return (
     <Paper
-      style={{
-        filter: "drop-shadow(7px 7px 10px rgba(0,0,0,0.55))",
-        height: "100vh",
-        width: "100%",
-        padding: "20px",
-        borderRadius: "15px",
-      }}
+      className={classes.PostDetails}
+      style={
+        {
+          // filter: "drop-shadow(7px 7px 10px rgba(0,0,0,0.55))",
+          // height: "100vh",
+          // width: "100%",
+          // padding: "20px",
+          // borderRadius: "15px",
+        }
+      }
       elevation={6}
     >
       <div className={classes.card}>
@@ -84,10 +87,8 @@ const PostDetails = () => {
             <strong>Realtime Chat - coming soon!</strong>
           </Typography> */}
           {/* <Divider style={{ margin: "20px 0" }} /> */}
-          {/* <Typography variant="body1">
-            <strong>Comments - coming soon!</strong>
-          </Typography> */}
-          {/* <Divider style={{ margin: "20px 0" }} /> */}
+          <CommentSection post={post} />
+          <Divider style={{ margin: "20px 0" }} />
         </div>
 
         <div className={classes.imageSection}>

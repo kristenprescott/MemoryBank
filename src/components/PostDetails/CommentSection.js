@@ -9,14 +9,17 @@ const CommentSection = ({ post }) => {
   console.log("post: ", post);
 
   const classes = useStyles();
-  const [comments, setComments] = useState([1, 2, 3, 4]);
+  const [comments, setComments] = useState(post?.post?.comments);
   const [comment, setComment] = useState("");
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    const finalComment = `${user.result.name}: ${post.comment}`;
+    const finalComment = `${user.result.name}: ${comment}`;
     dispatch(commentPost(finalComment, post.post._id));
+
+    console.log("new comment: ", comment);
+    console.log("post._id: ", post.post._id);
   };
 
   return (
@@ -29,11 +32,11 @@ const CommentSection = ({ post }) => {
           {post.post.comments &&
             post.post.comments.map((comment, idx) => (
               <Typography key={idx} gutterBottom variant="subtitle1">
-                Comment {idx}
+                ► @{comment}
               </Typography>
             ))}
         </div>
-        {/* BELOW: don't throw a hissy is the user doesn't exist */}
+        {/* don't throw a hissy is the user doesn't exist */}
         {user?.result?.name && (
           <div style={{ width: "70%" }}>
             <Typography gutterBottom variant="h6">

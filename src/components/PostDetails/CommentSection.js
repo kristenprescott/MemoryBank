@@ -14,12 +14,21 @@ const CommentSection = ({ post }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const finalComment = `${user.result.name}: ${comment}`;
-    dispatch(commentPost(finalComment, post.post._id));
 
+    // show new comments immediately:
+    const newComments = await dispatch(
+      commentPost(finalComment, post.post._id)
+    );
+
+    setComments(newComments);
+    // clear add comment section:
+    setComment("");
+
+    console.log("post.post._id: ", post.post._id);
+    console.log("comments: ", comments);
     console.log("new comment: ", comment);
-    console.log("post._id: ", post.post._id);
   };
 
   return (
@@ -36,7 +45,6 @@ const CommentSection = ({ post }) => {
               </Typography>
             ))}
         </div>
-        {/* don't throw a hissy is the user doesn't exist */}
         {user?.result?.name && (
           <div style={{ width: "70%" }}>
             <Typography gutterBottom variant="h6">

@@ -55,11 +55,8 @@ export default makeStyles((theme) => ({
     alignItems: "flex-start",
   },
   commentsInnerContainer: {
-    // display: "flex",
-    // justifyContent: "space-between",
-    // flexDirection: "column",
-    // alignItems: "flex-start",
     height: "200px",
+    width: "100%",
     overflowY: "auto",
     marginRight: "30px",
   },

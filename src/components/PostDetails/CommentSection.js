@@ -23,15 +23,11 @@ const CommentSection = ({ post }) => {
       commentPost(finalComment, post.post._id)
     );
 
-    setComments(newComments);
     // clear add comment section:
     setComment("");
+    setComments(newComments);
 
-    commentsRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "start",
-    });
+    commentsRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -42,9 +38,11 @@ const CommentSection = ({ post }) => {
             <span>Comments: </span>
           </Typography>
           {post.post.comments &&
-            post.post.comments.map((comment, idx) => (
+            post?.post?.comments?.map((comment, idx) => (
               <Typography key={idx} gutterBottom variant="subtitle1">
-                ► @{comment}
+                {/* split comment into username: comment; make username bold */}
+                ►<strong>@{comment.split(": ")[0]}</strong>
+                {comment.split(":")[1]}
               </Typography>
             ))}
           {/* anchor point: scroll to most recent comment */}

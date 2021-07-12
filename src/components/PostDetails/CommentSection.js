@@ -13,6 +13,7 @@ const CommentSection = ({ post }) => {
   const [comment, setComment] = useState("");
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
+  const commentsRef = useRef();
 
   const handleClick = async () => {
     const finalComment = `${user.result.name}: ${comment}`;
@@ -26,9 +27,11 @@ const CommentSection = ({ post }) => {
     // clear add comment section:
     setComment("");
 
-    console.log("post.post._id: ", post.post._id);
-    console.log("comments: ", comments);
-    console.log("new comment: ", comment);
+    commentsRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
   };
 
   return (
@@ -44,6 +47,8 @@ const CommentSection = ({ post }) => {
                 ► @{comment}
               </Typography>
             ))}
+          {/* anchor point: scroll to most recent comment */}
+          <div ref={commentsRef} />
         </div>
         {user?.result?.name && (
           <div style={{ width: "70%" }}>

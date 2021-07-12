@@ -56,8 +56,10 @@ export default makeStyles((theme) => ({
   },
   commentsInnerContainer: {
     height: "200px",
+    height: "auto",
     width: "100%",
-    overflowY: "auto",
+    // overflowY: "auto",
+    // overflowY: "scroll",
     marginRight: "30px",
   },
 }));

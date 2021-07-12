@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardActions,
@@ -23,22 +23,37 @@ const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
   const history = useHistory();
+  const [likes, setLikes] = useState(post?.likes);
+
+  const userId = user?.result?.googleId || user?.result?._id;
+  const hasLikedPost = post.likes.find((like) => like === userId);
+
+  const handleLike = async () => {
+    dispatch(likePost(post._id));
+
+    // did the current user like the post?
+    if (hasLikedPost) {
+      // toggle like
+      setLikes(post.likes.filter((id) => id !== userId));
+    } else {
+      // add new like
+      setLikes([...post.likes, userId]);
+    }
+  };
 
   const Likes = () => {
     if (post?.likes?.length > 0) {
-      return post.likes.find(
-        (like) => like === (user?.result?.googleId || user?.result?._id)
-      ) ? (
+      return hasLikedPost ? (
         <>
           &nbsp;
           {post?.likes?.length > 2
-            ? ` ${post.likes.length - 1} `
-            : `${post.likes.length} ${post.likes.length > 1 ? "" : ""}`}
+            ? ` ${likes.length - 1} `
+            : `${likes.length} ${likes.length > 1 ? "" : ""}`}
           <img alt="Thumbs up" style={{ width: "5vmin" }} src={ThumbsUpIcon} />
         </>
       ) : (
         <>
-          &nbsp;{post.likes.length} {post.likes.length === 1 ? "" : ""}
+          &nbsp;{likes.length} {likes.length === 1 ? "" : ""}
           <img alt="Thumbs up" style={{ width: "5vmin" }} src={ThumbsUpIcon} />
         </>
       );
@@ -162,7 +177,7 @@ const Post = ({ post, setCurrentId }) => {
           size="small"
           color="primary"
           disabled={!user?.result}
-          onClick={() => dispatch(likePost(post._id))}
+          onClick={handleLike}
         >
           <div
             style={{

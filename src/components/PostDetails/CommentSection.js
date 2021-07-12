@@ -41,7 +41,7 @@ const CommentSection = ({ post }) => {
             post?.post?.comments?.map((comment, idx) => (
               <Typography key={idx} gutterBottom variant="subtitle1">
                 {/* split comment into username: comment; make username bold */}
-                ►<strong>@{comment.split(": ")[0]}</strong>
+                ►<strong>@{comment.split(": ")[0]}: </strong>
                 {comment.split(":")[1]}
               </Typography>
             ))}
